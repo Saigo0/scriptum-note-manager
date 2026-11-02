@@ -111,7 +111,7 @@ jobs:
 
       - name: Preparar tags da imagem (DEV)
         id: docker-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/scriptum-auth
           tags: |
@@ -165,7 +165,7 @@ jobs:
 
       - name: Preparar tags da imagem (HOMOL)
         id: docker-meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/scriptum-auth
           tags: |
