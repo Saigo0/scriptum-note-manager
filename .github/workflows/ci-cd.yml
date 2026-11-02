@@ -53,7 +53,7 @@ jobs:
             build/reports/jacoco/jacocoSonarReport/
 
       - name: Analisar e validar qualidade no SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v6
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
