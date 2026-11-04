@@ -1,3 +1,5 @@
+package br.com.scriptum.resource;
+
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
