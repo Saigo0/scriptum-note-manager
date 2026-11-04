@@ -50,6 +50,7 @@ jobs:
             -Dsonar.junit.reportPaths=target/surefire-reports
             -Dsonar.sourceEncoding=UTF-8
             -Dsonar.qualitygate.wait=false
+        
 
   implantar-homol:
     name: Publicar e Implantar (Homol)
@@ -66,6 +67,9 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+      
+      - name: Dar permissao de execucao ao Maven
+        run: chmod +x mvnw    
 
       - name: Ler e validar versão do POM (SemVer)
         run: |
@@ -131,7 +135,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
-
+    
+      - name: Dar permissao de execucao ao Maven
+        run: chmod +x mvnw    
+    
       - name: Ler e validar versão do POM (SemVer)
         run: |
             VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
