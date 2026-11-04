@@ -103,7 +103,6 @@ jobs:
           images: ${{ secrets.DOCKERHUB_USERNAME }}/scriptum-note-manager
           tags: |
             type=raw,value=v${{ env.DOCKER_TAG_VERSION }}-homol
-            type=raw,value=latest-homol
 
       - name: Construir e enviar imagem Docker
         uses: docker/build-push-action@v5
