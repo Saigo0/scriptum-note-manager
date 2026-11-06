@@ -33,10 +33,10 @@ public class ServicoDiretoTest {
         assertNotNull(categoryResource.list());
         assertNotNull(categoryService.listCategories());
 
-        DocumentResource.ManualDocumentRequest request = new DocumentResource.ManualDocumentRequest();
-        request.categoryId = 1L; 
-        request.title = "Título de Teste";
-        request.paragraphs = List.of("Parágrafo 1");
+        ManualDocumentRequest request = new ManualDocumentRequest();
+        request.categoryId = 1L;
+        request.title = "Teste";
+        request.paragraphs = List.of("Paragrafo");
         
         assertNotNull(documentResource.createManual(request));
 
