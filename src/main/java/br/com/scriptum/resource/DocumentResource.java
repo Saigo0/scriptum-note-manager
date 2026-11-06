@@ -51,22 +51,21 @@ public class DocumentResource {
         return Response.ok(docs).build();
     }
 
-    @Transactional
-    public Document createManualDocument(String title, List<String> paragraphs, Long categoryId) {
+    @POST
+    @Path("/manual")
+    public Response createManual(ManualDocumentRequest request) {
+        try {
 
-        Category category = Category.findById(categoryId);
-        if (category == null) {
-            throw new IllegalArgumentException("Categoria não encontrada.");
+            Document doc = documentService.createManualDocument(
+                request.categoryId, 
+                request.title, 
+                request.paragraphs
+            );
+            return Response.status(Response.Status.CREATED).entity(doc).build();
+            
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
-
-        Document doc = new Document();
-        doc.title = title;
-        doc.content = paragraphs;
-        doc.status = "MANUALLY_TYPED";
-        doc.category = category; 
-        doc.persist();
-        
-        return doc;
     }
 
     @POST
