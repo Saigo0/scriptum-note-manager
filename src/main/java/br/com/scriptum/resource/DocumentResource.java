@@ -55,14 +55,12 @@ public class DocumentResource {
     @Path("/manual")
     public Response createManual(ManualDocumentRequest request) {
         try {
-
             Document doc = documentService.createManualDocument(
-                request.categoryId, 
                 request.title, 
-                request.paragraphs
+                request.paragraphs,
+                request.categoryId 
             );
             return Response.status(Response.Status.CREATED).entity(doc).build();
-            
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
