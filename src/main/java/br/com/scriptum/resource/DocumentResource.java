@@ -69,7 +69,13 @@ public class DocumentResource {
     @POST
     @Path("/scanned")
     public Response createScanned(ScannedDocumentRequest request) {
-        Document doc = documentService.createScannedDocument(request.title, request.language, request.imageBase64);
+        
+        Document doc = documentService.createScannedDocument(
+            request.categoryId,
+            request.title, 
+            request.language, 
+            request.imageBase64
+        );
         return Response.status(Response.Status.ACCEPTED).entity(doc).build(); 
     }
 
