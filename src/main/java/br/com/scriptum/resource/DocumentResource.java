@@ -25,6 +25,7 @@ public class DocumentResource {
     }
 
     public static class ScannedDocumentRequest {
+        public Long categoryId; 
         public String title;
         public String language;
         public String imageBase64;
