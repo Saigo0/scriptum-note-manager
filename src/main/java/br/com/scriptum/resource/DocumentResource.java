@@ -41,6 +41,13 @@ public class DocumentResource {
         return Response.ok(doc).build();
     }
 
+    @GET
+    @Path("/category/{categoryId}")
+    public Response getByCategory(@PathParam("categoryId") Long categoryId) {
+        List<Document> docs = documentService.findByCategoryId(categoryId);
+        return Response.ok(docs).build();
+    }
+
     @POST
     @Path("/manual")
     public Response createManual(ManualDocumentRequest request) {

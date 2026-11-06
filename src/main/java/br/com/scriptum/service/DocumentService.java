@@ -31,6 +31,11 @@ public class DocumentService {
     }
 
     @Transactional
+    public List<Document> findByCategoryId(Long categoryId) {
+        return Document.find("category.id", categoryId).list();
+    }
+
+    @Transactional
     public Document createManualDocument(String title, List<String> paragraphs) {
         validateSize(paragraphs);
 
