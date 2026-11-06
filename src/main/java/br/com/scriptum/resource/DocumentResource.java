@@ -48,17 +48,24 @@ public class DocumentResource {
         return Response.ok(docs).build();
     }
 
-    @POST
-    @Path("/manual")
-    public Response createManual(ManualDocumentRequest request) {
-        try {
-            Document doc = documentService.createManualDocument(request.title, request.paragraphs);
-            return Response.status(Response.Status.CREATED).entity(doc).build();
-        } catch (IllegalArgumentException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        }
-    }
+    @Transactional
+    public Document createManualDocument(String title, List<String> paragraphs, Long categoryId) {
+        validateSize(paragraphs);
 
+        Category category = Category.findById(categoryId);
+        if (category == null) {
+            throw new IllegalArgumentException("Categoria não encontrada.");
+        }
+
+        Document doc = new Document();
+        doc.title = title;
+        doc.content = paragraphs;
+        doc.status = "MANUALLY_TYPED";
+        doc.category = category; 
+        doc.persist();
+        
+        return doc;
+    }
     @POST
     @Path("/scanned")
     public Response createScanned(ScannedDocumentRequest request) {

@@ -36,13 +36,14 @@ public class DocumentService {
     }
 
     @Transactional
-    public Document createManualDocument(String title, List<String> paragraphs) {
+    public Document createManualDocument(String title, List<String> paragraphs, Long categoryId) {
         validateSize(paragraphs);
 
         Document doc = new Document();
         doc.title = title;
         doc.content = paragraphs;
         doc.status = "MANUALLY_TYPED";
+        doc.categoryId = categoryId;
         doc.persist();
         
         return doc;
