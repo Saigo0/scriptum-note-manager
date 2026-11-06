@@ -61,14 +61,21 @@ public class DocumentService {
     }
 
     @Transactional
-    public Document createScannedDocument(String title, String language, String imageBase64) {
+    public Document createScannedDocument(Long categoryId, String title, String language, String imageBase64) {
+        Category category = Category.findById(categoryId);
+        if (category == null) {
+            throw new IllegalArgumentException("Categoria não encontrada.");
+        }
+
         Document doc = new Document();
         doc.title = title;
-        doc.status = "SCANNING";
-        doc.persistAndFlush();
+        doc.status = "PROCESSING_OCR"; // Status temporário
+        doc.category = category; // Vínculo essencial
+        doc.persist(); 
         
+        // Agora que o documento tem um ID gerado pelo banco, você emite para a fila
         OcrRequest ocrRequest = new OcrRequest(doc.id, language, imageBase64);
-        ocrEmitter.send(ocrRequest);
+        // Seu código que envia o ocrRequest para o RabbitMQ (ex: emitter.send(ocrRequest))
         
         return doc;
     }
