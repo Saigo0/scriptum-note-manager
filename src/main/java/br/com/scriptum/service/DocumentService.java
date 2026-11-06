@@ -2,6 +2,7 @@ package br.com.scriptum.service;
 
 import br.com.scriptum.dto.OcrRequest;
 import br.com.scriptum.model.Document;
+import br.com.scriptum.model.Category;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
