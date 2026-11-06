@@ -5,6 +5,8 @@ import br.com.scriptum.service.DocumentService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import br.com.scriptum.model.Category;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class DocumentResource {
 
     @Transactional
     public Document createManualDocument(String title, List<String> paragraphs, Long categoryId) {
-        validateSize(paragraphs);
 
         Category category = Category.findById(categoryId);
         if (category == null) {
@@ -66,6 +67,7 @@ public class DocumentResource {
         
         return doc;
     }
+
     @POST
     @Path("/scanned")
     public Response createScanned(ScannedDocumentRequest request) {

@@ -39,12 +39,18 @@ public class DocumentService {
     public Document createManualDocument(String title, List<String> paragraphs, Long categoryId) {
         validateSize(paragraphs);
 
+        Category category = Category.findById(categoryId);
+        if (category == null) {
+            throw new IllegalArgumentException("Categoria não encontrada.");
+        }
+
         Document doc = new Document();
         doc.title = title;
         doc.content = paragraphs;
         doc.status = "MANUALLY_TYPED";
-        doc.categoryId = categoryId;
+        doc.category = category;
         doc.persist();
+
         
         return doc;
     }
