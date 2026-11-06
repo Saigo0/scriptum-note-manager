@@ -22,6 +22,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.Map;
+import java.util.HashMap;
+import static org.hamcrest.Matchers.equalTo;
 
 @QuarkusTest
 @IntegrationTest
