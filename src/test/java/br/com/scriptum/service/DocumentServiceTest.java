@@ -21,7 +21,7 @@ public class DocumentServiceTest {
 
         IllegalArgumentException exception = assertThrows(
             IllegalArgumentException.class, 
-            () -> service.createManualDocument("Title", paragraphs)
+            () -> service.createManualDocument("Title", paragraphs, 1L)
         );
 
         // Conferindo com a mensagem de erro que traduzimos

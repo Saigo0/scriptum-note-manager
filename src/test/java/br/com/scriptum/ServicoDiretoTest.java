@@ -32,11 +32,12 @@ public class ServicoDiretoTest {
         assertNotNull(categoryResource.list());
         assertNotNull(categoryService.listCategories());
 
-        DocumentResource.ManualDocumentRequest reqManual = new DocumentResource.ManualDocumentRequest();
-        reqManual.title = "Direct Manual";
-        reqManual.paragraphs = List.of("Direct text for JaCoCo to see");
+        DocumentResource.ManualDocumentRequest request = new DocumentResource.ManualDocumentRequest();
+        request.categoryId = 1L; 
+        request.title = "Título de Teste";
+        request.paragraphs = List.of("Parágrafo 1");
         
-        assertNotNull(documentResource.createManual(reqManual));
+        assertNotNull(documentResource.createManual(request));
 
         DocumentResource.ScannedDocumentRequest reqScan = new DocumentResource.ScannedDocumentRequest();
         reqScan.title = "Direct Scan";
