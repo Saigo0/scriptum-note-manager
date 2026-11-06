@@ -19,6 +19,7 @@ public class DocumentResource {
     DocumentService documentService;
 
     public static class ManualDocumentRequest {
+        public Long categoryId; 
         public String title;
         public List<String> paragraphs;
     }

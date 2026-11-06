@@ -5,6 +5,7 @@ import br.com.scriptum.resource.CategoryResource;
 import br.com.scriptum.resource.DocumentResource;
 import br.com.scriptum.service.CategoryService;
 import br.com.scriptum.service.DocumentService;
+import br.com.scriptum.resource.DocumentResource.ManualDocumentRequest;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
