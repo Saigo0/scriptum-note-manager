@@ -38,7 +38,7 @@ public class ServicoDiretoTest {
         request.title = "Teste";
         request.paragraphs = List.of("Paragrafo");
         
-        assertNotNull(documentResource.createManual(request));
+        assertNotNull(documentResource.createManualDocument(request));
 
         DocumentResource.ScannedDocumentRequest reqScan = new DocumentResource.ScannedDocumentRequest();
         reqScan.title = "Direct Scan";
