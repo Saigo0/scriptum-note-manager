@@ -69,13 +69,13 @@ public class DocumentService {
 
         Document doc = new Document();
         doc.title = title;
-        doc.status = "PROCESSING_OCR"; // Status temporário
-        doc.category = category; // Vínculo essencial
+        doc.status = "PROCESSING_OCR"; 
+        doc.category = category; 
         doc.persist(); 
         
-        // Agora que o documento tem um ID gerado pelo banco, você emite para a fila
         OcrRequest ocrRequest = new OcrRequest(doc.id, language, imageBase64);
-        // Seu código que envia o ocrRequest para o RabbitMQ (ex: emitter.send(ocrRequest))
+        
+        ocrEmitter.send(ocrRequest); 
         
         return doc;
     }
