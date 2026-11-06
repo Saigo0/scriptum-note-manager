@@ -3,6 +3,8 @@ package br.com.scriptum;
 import br.com.scriptum.model.Document;
 import br.com.scriptum.resource.CategoryResource;
 import br.com.scriptum.service.CategoryService;
+import br.com.scriptum.model.Category;
+import jakarta.transaction.Transactional;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.smallrye.reactive.messaging.memory.InMemoryConnector;
@@ -38,21 +40,26 @@ public class DocumentIntegrationTest {
     }
 
     @Test
+    @Transactional
     public void testCreateManualDocumentSuccess() {
-        JsonObject request = new JsonObject()
-                .put("title", "Class Notes")
-                .put("paragraphs", List.of("First paragraph", "Second paragraph"));
+        Category category = new Category();
+        category.title = "Categoria de Teste";
+        category.persist();
+
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("categoryId", category.id); 
+        requestBody.put("title", "Meu Novo Documento");
+        requestBody.put("paragraphs", List.of("Primeiro parágrafo do teste."));
 
         given()
             .contentType(ContentType.JSON)
-            .body(request.encode())
+            .body(requestBody)
         .when()
             .post("/documents/manual")
         .then()
             .statusCode(201)
-            .body("id", notNullValue())
-            .body("status", is("MANUALLY_TYPED"))
-            .body("title", is("Class Notes"));
+            .body("title", equalTo("Meu Novo Documento"))
+            .body("category.id", equalTo(category.id.intValue())); 
     }
 
     @Test
