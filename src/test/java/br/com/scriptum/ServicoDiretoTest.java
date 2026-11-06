@@ -41,10 +41,11 @@ public class ServicoDiretoTest {
         assertNotNull(documentResource.createManual(request));
 
         DocumentResource.ScannedDocumentRequest reqScan = new DocumentResource.ScannedDocumentRequest();
+        reqScan.categoryId = 1L;
         reqScan.title = "Direct Scan";
         reqScan.language = "en";
         reqScan.imageBase64 = "fake-image";
-        
+
         assertNotNull(documentResource.createScanned(reqScan));
 
         documentResource.editDocument(999L, List.of("Edited Text"));
