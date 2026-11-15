@@ -29,7 +29,7 @@ jobs:
       - name: Executar testes e gerar relatorios
         run: ./mvnw clean test
 
-      - name: Truque DevOps - Ocultar pom.xml
+      - name: Ocultar pom.xml
         run: mv pom.xml pom.xml.bkp
 
       - name: Analisar no SonarCloud
